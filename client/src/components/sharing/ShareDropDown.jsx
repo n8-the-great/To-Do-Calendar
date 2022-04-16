@@ -14,6 +14,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import axios from 'axios';
 
 const ShareMenu = styled((props) => (
   <Menu
@@ -62,8 +63,11 @@ export default function DisplaySharedWithUserDropdown() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [formErr, setFormErr] = useState('');
   const open = Boolean(anchorEl);
-  const [shares, setShares] = React.useState(['boc@isalmostdone.com', 'nate@conglomerate.com',
-  'excitedtobe@free.com']);
+  var sharedEmailsArray = ['boc@isalmostdone.com', 'nate@conglomerate.com',
+  'excitedtobe@free.com'];
+  const [shares, setShares] = React.useState(sharedEmailsArray);
+  const [sharesCheck, setSharesCheck] = React.useState(sharedEmailsArray.toString());
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -84,7 +88,6 @@ export default function DisplaySharedWithUserDropdown() {
 
   const handleEmailAdd = (email) => {
     const newShares = [...shares];
-
     console.log('email:', email);
 
     newShares.push(email);
@@ -93,6 +96,25 @@ export default function DisplaySharedWithUserDropdown() {
   };
 
 
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('fetch');
+      return await axios.get('http://localhost:3000/share/sharedByUser', {
+        params: {
+          email: '1@qq.com' // update to props containing current login
+        },
+        withCredentials: true
+      });
+    }
+    fetchData().then((emailArr) => {
+      console.log('data:', emailArr.data);
+      setShares(emailArr.data);
+      setSharesCheck(emailArr.data.toString());
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [sharesCheck]);
 
   return (
     <div>

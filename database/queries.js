@@ -40,6 +40,10 @@ module.exports = {
   ) as calendars
 from users
 where user_email = $1;
-`
+`,
+getSharedByUser: `SELECT shared_to FROM sharedCals WHERE user_email = $1;`,
+getSharedWithUser: `SELECT user_email FROM sharedCals WHERE shared_to = $1;`,
+
+
 
 }

@@ -5,14 +5,35 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import axios from 'axios';
+
 
 export default function DisplaySharedWithUserItem(props) {
   const [checked, setChecked] = React.useState([0]);
+  var sharedEmailsArray = ['boc@isalmostdone.com', 'nate@conglomerate.com',
+  'excitedtobe@free.com'];
+  const [shared, setShared] = React.useState(sharedEmailsArray);
+  const [sharedCheck, setSharedCheck] = React.useState(sharedEmailsArray.toString());
+
+  useEffect(() => {
+    const fetchData = async () => {
+      return await axios.get('http://localhost:3000/share/sharedWithUser', {
+        params: {
+          email: '1@qq.com' // update to props containing current login
+        },
+        withCredentials: true
+      });
+    }
+    fetchData().then((emailArr) => {
+      setShared(emailArr.data);
+      setSharedCheck(emailArr.data.toString());
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [sharedCheck]);
 
   // array of shared emails
-  var sharedEmailsArray = ['boc@isalmostdone.com', 'nate@conglomerate.com',
-    'excitedtobe@free.com'];
-
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -29,11 +50,11 @@ export default function DisplaySharedWithUserItem(props) {
   return (
     <div>
       <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {sharedEmailsArray.map((email) => {
+      {shared.map((email, index) => {
         const labelId = `shared-list-label-${email}`;
         return (
           <ListItem
-            key={email}
+            key={index}
             secondaryAction={
               <Checkbox
                 edge="end"
@@ -45,7 +66,7 @@ export default function DisplaySharedWithUserItem(props) {
             disablePadding
           >
           <ListItemButton role={undefined} onClick={handleToggle(email)} dense>
-            <ListItemText id={labelId} primary={`${email}`} />
+            <ListItemText id={labelId} primary={`${email.user_email}`} />
           </ListItemButton>
           </ListItem>
         );

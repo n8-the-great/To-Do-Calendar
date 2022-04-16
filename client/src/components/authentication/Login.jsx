@@ -3,7 +3,7 @@ import { useNavigate, BrowserRouter as Router, Routes, Route } from 'react-route
 import { makeStyles, IconButton, Link, Avatar, TextField, Box, Paper, Typography, AppBar, Button, Card, Container, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar } from '@material-ui/core';
 import GoogleIcon from '@mui/icons-material/Google';
 import loginSchema from './LoginValidation.js';
-import axios from 'axios'
+import axios from 'axios';
 import img from '../../../dist/images/d1.png';
 
 const useStyles = makeStyles((theme) => ({
