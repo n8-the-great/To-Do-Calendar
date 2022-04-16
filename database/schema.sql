@@ -49,6 +49,15 @@ CREATE TABLE todoitems (
 );
 \COPY todoitems (id, title, description, duration, start, end_date, in_calendar, category_id) FROM './items.csv' DELIMITER ',' CSV HEADER;
 
+DROP table if EXISTS sharedCals;
+CREATE TABLE sharedCals (
+  user_email TEXT REFERENCES users (user_email) ON UPDATE CASCADE ON DELETE CASCADE,
+  shared_to  TEXT REFERENCES users (user_email) ON UPDATE CASCADE,
+  CONSTRAINT user_shared_to_pk PRIMARY KEY (user_email, shared_to)
+);
+\COPY sharedCals (user_email, shared_to) FROM './sharedCal.csv' DELIMITER ',' CSV HEADER;
+
+
 CREATE INDEX ON "users" ("user_id");
 CREATE INDEX ON "calendars" ("calendar_id");
 CREATE INDEX ON "categories" ("category_id");
