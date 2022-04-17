@@ -124,7 +124,6 @@ export default function ShareWith() {
           require = 'true'
           helperText={formErr === 'email' ? errMsg : ''}
           fullWidth
-          // className={classes.fieldGap}
           onChange={(e)=>(handleChange(e))}
         />
         <IconButton aria-label="add">
@@ -132,7 +131,6 @@ export default function ShareWith() {
         </IconButton>
       </MenuItem>
       <Divider sx={{ my: 0.5 }} />
-      {/* <MenuItem onClick={handleClose} disableRipple>  */}
       <MenuItem onClick={handleClose} disableRipple>
         List of Shared users
       </MenuItem>

@@ -49,10 +49,12 @@ const StyledMenu = styled((props) => (
 }));
 
 
-export default function DisplaySharedWithUserDropdown() {
+export default function DisplaySharedWithUserDropdown({userEmail}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [formErr, setFormErr] = useState('');
   const open = Boolean(anchorEl);
+  console.log('sharedWithUser:', userEmail);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -92,7 +94,7 @@ export default function DisplaySharedWithUserDropdown() {
         open={open}
         onClose={handleClose}
       >
-      <ViewList />
+      <ViewList userEmail={userEmail}/>
 
       </StyledMenu>
     </div>

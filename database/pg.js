@@ -27,7 +27,6 @@ const getInfo = async (email, callback) => {
 
 const getSharedWithUser = async function (email) {
   const client = await pool.connect()
-
   try {
     return await client.query(query.getSharedWithUser, [email]);
   } catch (err) {
@@ -37,12 +36,21 @@ const getSharedWithUser = async function (email) {
   }
 };
 
-
 const getSharedByUser = async function (email) {
   const client = await pool.connect()
-
   try {
     return await client.query(query.getSharedByUser, [email]);
+  } catch (err) {
+    throw (err);
+  } finally {
+    client.release();
+  }
+};
+
+const deleteFromShares = async function (email) {
+  const client = await pool.connect()
+  try {
+    return await client.query(query.deleteFromShares, [email]);
   } catch (err) {
     throw (err);
   } finally {
@@ -66,6 +74,9 @@ const getSharedTo = async (email) => {
   })
 };
 
+
+
+
 module.exports = {
-  getInfo, getSharedWithUser, getSharedByUser, pool
+  getInfo, getSharedWithUser, getSharedByUser, deleteFromShares, pool
 }

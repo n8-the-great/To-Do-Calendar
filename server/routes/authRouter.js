@@ -102,8 +102,18 @@ authRouter.route('/success').get((req, res) => {
 
 authRouter.get('/isLoggedIn', (req, res) => {
   let isAuth = req.isAuthenticated();
+  var userData = {
+    loggedIn: isAuth,
+    user: req.user
+  };
   // console.log('isLoggedIn auth:', isAuth,  req.session);
-  res.status(200).send(isAuth)
+  // res.status(200).send(isAuth)
+
+  if (isAuth) {
+    res.status(200).send(userData);
+  } else {
+    res.status(200).send(null);
+  }
 });
 
 // optimize later with middleware that verifies this and /isloggedin

@@ -8,32 +8,25 @@ import Checkbox from '@mui/material/Checkbox';
 import axios from 'axios';
 
 
-export default function DisplaySharedWithUserItem(props) {
+export default function DisplaySharedWithUserItem({userEmail}) {
   const [checked, setChecked] = React.useState([0]);
   var sharedEmailsArray = ['boc@isalmostdone.com', 'nate@conglomerate.com',
   'excitedtobe@free.com'];
   const [shared, setShared] = React.useState(sharedEmailsArray);
   const [sharedCheck, setSharedCheck] = React.useState(sharedEmailsArray.toString());
 
-  useEffect(() => {
-    const fetchData = async () => {
-      return await axios.get('http://localhost:3000/share/sharedWithUser', {
-        params: {
-          email: '1@qq.com' // update to props containing current login
-        },
-        withCredentials: true
-      });
-    }
-    fetchData().then((emailArr) => {
-      setShared(emailArr.data);
-      setSharedCheck(emailArr.data.toString());
-    })
-    .catch((err) => {
+  useEffect(async () => {
+    await axios.get('http://localhost:3000/share/sharedWithUser', {
+      params: {email: userEmail},
+      withCredentials: true
+    }).then((values) => {
+      setShared(values.data);
+      setSharedCheck((value.data).toString());
+    }).catch((err) => {
       console.log(err);
-    })
+    });
   }, [sharedCheck]);
 
-  // array of shared emails
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -45,7 +38,6 @@ export default function DisplaySharedWithUserItem(props) {
     }
     setChecked(newChecked);
   };
-
 
   return (
     <div>

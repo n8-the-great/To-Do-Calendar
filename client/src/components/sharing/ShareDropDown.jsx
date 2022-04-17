@@ -59,7 +59,7 @@ const ShareMenu = styled((props) => (
 }));
 
 
-export default function DisplaySharedWithUserDropdown() {
+function DisplaySharedWithUserDropdown({userEmail}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [formErr, setFormErr] = useState('');
   const open = Boolean(anchorEl);
@@ -68,6 +68,17 @@ export default function DisplaySharedWithUserDropdown() {
   const [shares, setShares] = React.useState(sharedEmailsArray);
   const [sharesCheck, setSharesCheck] = React.useState(sharedEmailsArray.toString());
 
+  useEffect(async () => {
+    await axios.get('http://localhost:3000/share/sharedByUser', {
+      params: {email: userEmail},
+      withCredentials: true
+    }).then((values) => {
+      setShares(values.data);
+      setSharesCheck((value.data).toString());
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, [sharesCheck]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -76,45 +87,32 @@ export default function DisplaySharedWithUserDropdown() {
     setAnchorEl(null);
   };
 
-  const handleEmailRemove = (email) => () => {
-    const currentIndex = shares.indexOf(email);
-    const newShares = [...shares];
+  const handleEmailRemove = (e) => async () => {
+    const currentIndex = shares.indexOf(e);
+    console.log('in handleEmailRemove');
+    console.log('expecting email: ', e);
 
-    newShares.splice(currentIndex, 1);
+    await axios.delete('http://localhost:3000/share/deleteFromShares', {
+      params: {email: e},
+      withCredentials: true
+    }).then((result) => {
+      const newShares = [...shares];
+      newShares.splice(currentIndex, 1);
 
-    setShares(newShares);
-  };
-
-
-  const handleEmailAdd = (email) => {
-    const newShares = [...shares];
-    console.log('email:', email);
-
-    newShares.push(email);
-
-    setShares(newShares);
-  };
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      console.log('fetch');
-      return await axios.get('http://localhost:3000/share/sharedByUser', {
-        params: {
-          email: '1@qq.com' // update to props containing current login
-        },
-        withCredentials: true
-      });
-    }
-    fetchData().then((emailArr) => {
-      console.log('data:', emailArr.data);
-      setShares(emailArr.data);
-      setSharesCheck(emailArr.data.toString());
-    })
-    .catch((err) => {
+      setShares(newShares);
+    }).catch((err) => {
       console.log(err);
-    })
-  }, [sharesCheck]);
+    });
+  };
+
+
+  const handleEmailAdd = (e) => {
+    const newShares = [...shares];
+    newShares.push(e);
+
+    setShares(newShares);
+  };
+
 
   return (
     <div>
@@ -142,8 +140,10 @@ export default function DisplaySharedWithUserDropdown() {
       >
         <ShareWithEmail emailArray={shares} email={handleEmailAdd}/>
         <Divider sx={{ my: 0.8 }} />
-        <ShareList emailArray={shares} email={handleEmailRemove}/>
+        <ShareList emailArray={shares} emailRemove={handleEmailRemove}/>
       </ShareMenu>
     </div>
   );
 }
+
+export default DisplaySharedWithUserDropdown;

@@ -18,16 +18,20 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import img from '../../dist/images/todocal - logo.png';
 import CircularProgress from '@mui/material/CircularProgress';
-import ShareWithOthers from './sharing/ShareDropDown.jsx';
-import ViewShares from './sharing/SharedWithUserDropdown.jsx';
+import Sharing from './sharing/ShareDropDown.jsx';
+import Viewing from './sharing/SharedWithUserDropdown.jsx';
 
 var pages = [];
 const settings = ['Profile','Logout'];
 
-const TopBar = ({isLoading, setIsLoggedIn, isLoggedIn, isMobile, onCalendar, setOnCalendar}) => {
+const TopBar = ({isLoading, setIsLoggedIn, isLoggedIn, isMobile, onCalendar, setOnCalendar, userEmail}) => {
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
+
+  const ShareWithOthers = (<Sharing userEmail={userEmail}/>);
+  const ViewShares = (<Viewing userEmail={userEmail}/>);
 
   if (!isMobile) {
     pages = []
@@ -68,10 +72,10 @@ const TopBar = ({isLoading, setIsLoggedIn, isLoggedIn, isMobile, onCalendar, set
       <AppBar style={{ background: 'white', marginBottom:'20px'}} position='static'>
         <Toolbar >
           <Box style={{margin: '0 auto', display: "flex", alignItems: 'right' }}>
-            <ShareWithOthers />
+            {ShareWithOthers}
           </Box>
           <Box sx={{display: "flex", alignItems: 'left'}}>
-            <ViewShares />
+            {ViewShares}
           </Box>
           <Box style={{margin: '0 auto', display: "flex"}}></Box>
           <Box>

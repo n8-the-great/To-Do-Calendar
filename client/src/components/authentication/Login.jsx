@@ -66,7 +66,7 @@ const Login = ({isLoggedIn, setIsLoggedIn}) => {
   }, [state])
 
 
-  console.log('setIsLoggedIn:', setIsLoggedIn);
+  // console.log('setIsLoggedIn:', setIsLoggedIn);
   const handleChange =  (e) => {
     setFormErr('');
     const { name, value } = e.target;
