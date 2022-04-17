@@ -1,6 +1,11 @@
-require('dotenv').config();
 const { Pool, Client } = require('pg');
-const query = require('./queries.js');
+const query = require('.././models/main_functions/queries.js');
+require('dotenv').config();
+
+// user: postgres
+// host: '54.209.199.189',
+// port: '5432',
+// database: 'tododb',
 
 const pool = new Pool({
   user: process.env.PGUSER,

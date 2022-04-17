@@ -73,7 +73,8 @@ module.exports = {
     hot: true,
     overlay: true,
     historyApiFallback: true,
-    host: 'localhost'
+    // host: '10.0.0.90'
+
     // proxy: {
     //   '/api': {
     //     target: 'http://localhost:3000',

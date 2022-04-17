@@ -12,10 +12,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function Category({tasks, addTask, openModal, isMobile, deleteTask, handleModalOpen, isOpen, clickedTask}) {
+function Category({tasks, addTask, openModal, isMobile, deleteTask, draggedEvent, setDraggedEvent, handleDragStart}) {
   const classes = useStyles();
   const [totalTime, setTotalTime] = useState(0);
-
+  const {name} = tasks;
+  console.log('tasks in category', tasks)
   return (
     <Container>
       <Paper elevation={2} className={classes.paper}>
@@ -28,9 +29,9 @@ function Category({tasks, addTask, openModal, isMobile, deleteTask, handleModalO
           }}>Add Task</Button>
         </Container>
         <Container sx={{ display: 'inline-block'}}>
-          <Tasks tasks={tasks.todoitems} deleteTask={deleteTask} openModal={openModal} isMobile={isMobile}
-            handleModalOpen={handleModalOpen} isOpen={isOpen} clickedTask={clickedTask}
-          />
+          <Tasks tasks={tasks} deleteTask={deleteTask} openModal={openModal} isMobile={isMobile}
+          draggedEvent={draggedEvent}
+          setDraggedEvent={setDraggedEvent} handleDragStart={handleDragStart}/>
         </Container>
     </Paper>
   </Container>

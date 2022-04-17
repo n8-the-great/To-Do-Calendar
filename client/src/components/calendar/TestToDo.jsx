@@ -11,9 +11,11 @@ function TestToDo(props) {
     start: new Date(moment('9 Apr 2022 09:30')),
     end: new Date(moment('13 Apr 2022 09:30')),
     category_id: 1,
+    inCalendar: false
   }
   return (
-    <Paper style={{width: '200px', overflowWrap: 'anywhere'}} onDragStart={() => props.handleDragStart(test)} draggable='true'>{JSON.stringify(test, null, ' ')}</Paper>
+    <Paper style={{width: '200px', overflowWrap: 'anywhere'}} onDragStart={() => props.handleDragStart(test)}
+    draggable='true'>{JSON.stringify(test, null, ' ')}</Paper>
   )
 }
 

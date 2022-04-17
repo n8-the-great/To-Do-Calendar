@@ -2,7 +2,7 @@
 @import 'react-big-calendar/lib/addons/dragAndDrop/styles'; // if using DnD
 
 .calendar {
-  font-family: arial;
+  font-family: 'Basic';
 }
 
 @media screen and (min-width: 1000px) {
@@ -17,6 +17,5 @@
   .calendar {
     min-height: 80vh;
     min-width: 100%;
-    font: 'sans-serif';
   }
 }

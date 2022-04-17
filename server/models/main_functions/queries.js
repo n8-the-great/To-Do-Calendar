@@ -47,3 +47,7 @@ where user_email = $1;
   userExists: `SELECT user_email FROM users WHERE user_email = $1;`,
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd46b452c364b6b1bfa2d418f64275265cd7ffc3
