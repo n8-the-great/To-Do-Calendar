@@ -45,9 +45,4 @@ where user_email = $1;
   getSharedWithUser: `SELECT user_email FROM sharedCals WHERE shared_to = $1;`,
   deleteFromShares: `DELETE FROM sharedCals WHERE shared_to = $1 RETURNING *;`,
   userExists: `SELECT user_email FROM users WHERE user_email = $1;`,
-
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> cd46b452c364b6b1bfa2d418f64275265cd7ffc3

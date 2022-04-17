@@ -57,7 +57,7 @@ const Home = ({isMobile, isLoggedIn, isLoading, setIsLoggedIn, userEmail, shared
 
   // GET '/todoList/:userEmail' -> For all data
   const getAllTodos = () => {
-    console.log('Get All Todo Data');
+    // console.log('Get All Todo Data');
     // axios.get('/todoList', { params: { userEmail: userEmail } })
     //   .then((result) => {
       //     console.log(result);
@@ -68,7 +68,7 @@ const Home = ({isMobile, isLoggedIn, isLoading, setIsLoggedIn, userEmail, shared
 
   // POST '/todoList/:userEmail' -> Adding or Upserting a "todoList item"
   const addTodo = (todo) => {
-    console.log('Add todo: ', todo);
+    // console.log('Add todo: ', todo);
     // axios.post('/todoList', { params: { userEmail: userEmail }, data: todo })
     //   .then((result) => {
     //     console.log(result);
@@ -78,7 +78,7 @@ const Home = ({isMobile, isLoggedIn, isLoading, setIsLoggedIn, userEmail, shared
 
   // PATCH '/todoList/:userEmail' -> For updating the data -> ex. Moving around item in Calendar / Lengthening item in Calendar / Clicking on "Done" in Modal for Calendar/TodoList
   const updateTodo = (todo) => {
-    console.log('Update Todo: ', todo);
+    // console.log('Update Todo: ', todo);
     // axios.patch('/todoList', { params: { userEmail: userEmail }, data: todo })
     //   .then((result) => {
       //     console.log(result);
@@ -88,7 +88,7 @@ const Home = ({isMobile, isLoggedIn, isLoading, setIsLoggedIn, userEmail, shared
 
   // DELETE '/todoList/:userEmail' -> For deleting the data -> Clicking on "Delete" button in Modal
   const deleteTodo = (todo) => {
-    console.log('Delete Todo: ', todo);
+    // console.log('Delete Todo: ', todo);
     // axios.delete('/todoList', { params: { userEmail: userEmail }, data: todo })
     //   .then((result) => {
     //     console.log(result);

@@ -1,5 +1,5 @@
 const shareRouter   = require('express').Router();
-const shareDB = require('../../database/pg.js');
+const shareDB = require('../controllers/pg.js');
 
 
 shareRouter.route('/sharedWithUser').get((req, res) => {

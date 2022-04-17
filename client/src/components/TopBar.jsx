@@ -57,7 +57,7 @@ const TopBar = ({isLoading, setIsLoggedIn, isLoggedIn, isMobile, onCalendar, set
       .then((res) => {
         console.log('log out res:', res.data)
         if (res.data === false) {
-          setIsLoggedIn(false)
+          setIsLoggedIn(true)
         }
       })
       .catch((err) => {
@@ -72,10 +72,10 @@ const TopBar = ({isLoading, setIsLoggedIn, isLoggedIn, isMobile, onCalendar, set
       <AppBar style={{ background: 'white', marginBottom:'20px'}} position='static'>
         <Toolbar >
           <Box style={{margin: '0 auto', display: "flex", alignItems: 'right' }}>
-            {ShareWithOthers}
+            {/* {ShareWithOthers} */}
           </Box>
           <Box sx={{display: "flex", alignItems: 'left'}}>
-            {ViewShares}
+            {/* {ViewShares} */}
           </Box>
           <Box style={{margin: '0 auto', display: "flex"}}></Box>
           <Box>

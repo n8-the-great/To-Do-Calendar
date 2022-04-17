@@ -17,33 +17,27 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:3000/auth/isLoggedIn', {withCredentials: true})
     .then((result) => {
-      // console.log('login result:', result.user);
       console.log('is login auth:', result.data)
-      setIsLoggedIn(result.data.loggedIn);
-      setEmail(result.data.user.username)
+      setIsLoggedIn(result.data);
       setIsLoading(false);
     })
     .catch((err) => {
-      setIsLoggedIn(false);
-      setEmail('1@qq.com');
-      setIsLoading(true);
       console.log(err);
     })
   }, [isLoggedIn])
-  console.log('1:', userEmail);
-  console.log('2:', isLoggedIn)
-  // useEffect(() => {
-  //   axios.get('http://localhost:3000/auth/userEmail', {withCredentials: true})
-  //   .then((result) => {
-  //     console.log('result:', result);
-  //     setEmail(result.data.username);
-  //   })
-  //   .catch((err) => {
-  //     // Default email for DEMO Landing Page
-  //     setEmail('1@qq.com');
-  //     console.log(err);
-  //   })
-  // }, [userEmail])
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/auth/userEmail', {withCredentials: true})
+    .then((result) => {
+      console.log('result:', result);
+      setEmail(result.data.username);
+    })
+    .catch((err) => {
+      // Default email for DEMO Landing Page
+      setEmail('1@qq.com');
+      console.log(err);
+    })
+  }, [userEmail])
 
 
   // const naviBar = (<TopBar isMobile={isMobile} onCalendar={onCalendar} setOnCalendar={setOnCalendar}/>)
